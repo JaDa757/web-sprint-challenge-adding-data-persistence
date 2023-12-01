@@ -1,15 +1,13 @@
-// build your `/api/projects` router here
+
 const router = require('express').Router()
 
+const Project =  require('./model')
 
 
-
-router.use((err, req, res, next) => { // eslint-disable-line
-    res.status(500).json({
-        customMessage: 'something went wrong in projects router.js!',
-        message: err.message,
-        stack: err.stack,
-    })
+router.use('*', (req, res) => {
+    res.json({ api: 'does this even work'})
 })
+
+
 
 module.exports = router

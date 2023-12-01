@@ -1,20 +1,24 @@
-
 const router = require('express').Router()
 
 const Project = require('./model')
 
-router.get('/', (req, res, next) => {
-    Project.getAll()
-        .then(resource => {
-            res.status(200).json(resource)
-        })
-        .catch(next)
+router.get('/', async (req, res, next) => {
+    try {
+        const projects = await Project.getAll()
+        res.status(200).json(projects)
+    }
+    catch (error) {
+        next(error)
+    }
 })
 
 
 
 router.use('*', (req, res) => {
-    res.json({ api: 'does this even work' })
+    res.status(404).json({
+        error: 'Not Found!',
+        message: 'The route you wanted aint here bro, try again'
+    })
 })
 
 

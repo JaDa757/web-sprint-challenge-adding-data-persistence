@@ -12,6 +12,14 @@ router.get('/', async (req, res, next) => {
     }
 })
 
+router.post('/', async (req, res, next) => {
+    try {
+        const newProject = await Project.createProject(req.body);
+        res.status(201).json(newProject);
+    } catch (error) {
+        next(error);
+    }
+});
 
 
 router.use('*', (req, res) => {
